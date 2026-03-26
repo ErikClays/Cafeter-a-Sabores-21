@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores 21</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3e8e2;
+            margin: 0;
+            color: #5a3d4a;
+            text-align: center;
+        }
+
+        header {
+            background-color: #9c5a78;
+            color: white;
+            padding: 15px;
+        }
+
+        nav {
+            background-color: #e8b6c8;
+            padding: 10px;
+            border-radius: 20px;
+            width: 80%;
+            margin: 10px auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #e8b6c8;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #d89ab0;
+            transform: scale(1.05);
+        }
+
+        section {
+            padding: 30px;
+            text-align: center;
+        }
+
+        #inicio h2 {
+            font-size: 50px;
+            color: #9c5a78;
+            margin-bottom: 20px;
+        }
+
+        #inicio p {
+            max-width: 600px;
+            margin: auto;
+            font-size: 16px;
+        }
+
+        /* ========================= */
+        /* CARRUSEL */
+        /* ========================= */
+        .carrusel {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .carrusel-track {
+            display: flex;
+            transition: transform 0.4s ease;
+        }
+
+        .carrusel-track img {
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 12px;
+        }
+
+        .carrusel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        /* ========================= */
+        /* MODALES */
+        /* ========================= */
+        #menuImagen, #ordenModal, #pedidosModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #menuImagen.show, #ordenModal.show, #pedidosModal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #menuImagen img {
+            max-width: 90%;
+            max-height: 80%;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px black;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        #menuImagen.show img {
+            transform: scale(1);
+        }
+
+        .orden-contenido {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 300px;
+            text-align: center;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        #ordenModal.show .orden-contenido,
+        #pedidosModal.show .orden-contenido {
+            transform: scale(1);
+        }
+
+        #listaPedidos {
+            list-style: none;
+            padding: 0;
+        }
+
+        #listaPedidos li {
+            background: #fff;
+            margin: 10px auto;
+            padding: 10px;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        #nosotros {
+            background: #e2b5e3;
+            margin: 30px auto;
+            padding: 25px;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        #nosotros p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SABORES 21</h1>
+    <nav>
+        <a href="#nosotros">Sobre nosotros</a>
+        <a href="https://maps.google.com" target="_blank">Ubicación</a>
+        <a href="#" id="btnMenu">Menú</a>
+        <a href="#" id="btnOrdenar">Ordenar</a>
+        <a href="#" id="btnPedidos">Mis pedidos</a>
+        <a href="#contacto">Soporte</a>
+    </nav>
+</header>
+
+<section id="inicio">
+    <div class="inicio-contenedor">
+        <div class="inicio-texto">
+            <h2>PROMOCIONES Y MÁS</h2>
+            <p>
+                Disfruta nuestras promociones diarias y dale sabor
+                a tu rutina con el mejor café. Cada día encontrarás 
+                una oferta especial: el Capuchino con su textura 
+                cremosa y el Espresso con su intensidad única se 
+                alternan durante la semana para sorprenderte en 
+                cada visita.
+            </p>
+            <button>Saber más...</button>
+        </div>
+
+        <div class="inicio-imagen">
+            <div class="carrusel">
+                <button class="prev">❮</button>
+                <div class="carrusel-track">
+                    <img src="imagenes/capuchino.jpg">
+                    <img src="imagenes/espresso.jpg">
+                    <img src="imagenes/Cafe Helado.jpg">
+                    <img src="imagenes/Rol de Canela.jpg">
+                </div>
+                <button class="next">❯</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MENÚ -->
+<section id="menuImagen">
+    <img src="imagenes/Menú Cafetería Ilustrado Café.jpg" alt="Menú">
+</section>
+
+<!-- ORDENAR -->
+<section id="ordenModal">
+    <div class="orden-contenido">
+        <h2>Realiza tu pedido ☕</h2>
+
+        <label>Bebida:</label>
+        <select id="bebida">
+            <option>Capuchino</option>
+            <option>Espresso</option>
+            <option>Latte</option>
+            <option>Cafe Caliente</option>
+            <option>Café helado</option>
+            <option>Rol de canela</option>
+            <option>Pan dulce</option>
+            <option>Frapé de chocolate</option>
+            <option>Malteada</option>
+            <option>Pastel de queso</option>
+            <option>Pastel de fresa</option>
+            <option>Café americano</option>
+            <option>Café expreso</option>
+            <option>Café cubano</option>
+            <option>Pan de nata</option>
+        </select>
+
+        <br><br>
+
+        <label>Cantidad:</label>
+        <input type="number" id="cantidad" value="1" min="1">
+
+        <br><br>
+
+        <button onclick="hacerPedido()">Confirmar</button>
+    </div>
+</section>
+
+<!-- MIS PEDIDOS -->
+<section id="pedidosModal">
+    <div class="orden-contenido">
+        <h2>Mis pedidos 🧾</h2>
+        <ul id="listaPedidos"></ul>
+    </div>
+</section>
+
+<section id="nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>
+        Somos una cafetería enfocada en ofrecer bebidas de calidad y 
+        un ambiente cómodo para todos. Nos gusta que cada cliente se 
+        sienta como en casa mientras disfruta de su bebida favorita.
+    </p>
+    <p>
+        Buscamos convertirnos en un lugar reconocido por su calidad
+        y servicio, siendo la cafetería favorita de nuestra comunidad bachiller.
+    </p>
+</section>
+
+<section id="contacto">
+    <h2>Soporte</h2>
+    <p><strong>Teléfono:</strong> 993 146 7958</p>
+    <p><strong>Email:</strong> soporte@sabores21.com</p>
+    <p><strong>Ubicación:</strong> Cafetería Sabores 21, Cobatab P21, Tapotzingo, Nacajuca, Tabasco</p>
+    <p><strong>Horario de atención:</strong> Lunes a Viernes de 5:00 a 19:00</p>
+    <p><strong>Redes Sociales:</strong> 
+        <a href="https://www.facebook.com" target="_blank">Facebook</a> | 
+        <a href="https://www.instagram.com" target="_blank">Instagram</a>
+    </p>
+    <div style="width: 100%; max-width: 600px; margin: 20px auto;"></div>
+    <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3876.0000000000005!2d-93.01161813056233!3d18.20435821289593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" 
+            width="100%" 
+            height="350" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</section>
+
+<script>
+    // =========================
+    // MENÚ POP-UP
+    // =========================
+    const btnMenu = document.getElementById('btnMenu');
+    const menu = document.getElementById('menuImagen');
+
+    btnMenu.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.classList.add('show');
+    });
+
+    menu.addEventListener('click', (e) => {
+        if (e.target === menu) {
+            menu.classList.remove('show');
+        }
+    });
+
+    // =========================
+    // MODAL ORDENAR
+    // =========================
+    const btnOrdenar = document.getElementById('btnOrdenar');
+    const ordenModal = document.getElementById('ordenModal');
+
+    btnOrdenar.addEventListener('click', (e) => {
+        e.preventDefault();
+        ordenModal.classList.add('show');
+    });
+
+    ordenModal.addEventListener('click', (e) => {
+        if (e.target === ordenModal) {
+            ordenModal.classList.remove('show');
+        }
+    });
+
+    // =========================
+    // MODAL MIS PEDIDOS
+    // =========================
+    const btnPedidos = document.getElementById('btnPedidos');
+    const pedidosModal = document.getElementById('pedidosModal');
+
+    btnPedidos.addEventListener('click', (e) => {
+        e.preventDefault();
+        pedidosModal.classList.add('show');
+    });
+
+    pedidosModal.addEventListener('click', (e) => {
+        if (e.target === pedidosModal) {
+            pedidosModal.classList.remove('show');
+        }
+    });
+
+    // =========================
+    // HACER PEDIDO
+    // =========================
+    function hacerPedido() {
+        let bebida = document.getElementById("bebida").value;
+        let cantidad = document.getElementById("cantidad").value;
+
+        let li = document.createElement("li");
+        li.textContent = `${cantidad} ${bebida}(s) ☕`;
+
+        document.getElementById("listaPedidos").appendChild(li);
+        ordenModal.classList.remove('show');
+    }
+
+    // =========================
+    // CARRUSEL MANUAL
+    // =========================
+    const track = document.querySelector('.carrusel-track');
+    const images = document.querySelectorAll('.carrusel-track img');
+    const btnNext = document.querySelector('.next');
+    const btnPrev = document.querySelector('.prev');
+
+    let index = 0;
+
+    btnNext.addEventListener('click', () => {
+        index++;
+        if (index >= images.length) index = 0;
+        track.style.transform = `translateX(-${index * 100}%)`;
+    });
+
+    btnPrev.addEventListener('click', () => {
+        index--;
+        if (index < 0) index = images.length - 1;
+        track.style.transform = `translateX(-${index * 100}%)`;
+    });
+</script>
+
+</body>
+</html>

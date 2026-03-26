@@ -1,0 +1,295 @@
+/* ========================= */
+/* ESTILO GENERAL */
+/* ========================= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3e8e2;
+    margin: 0;
+    color: #5a3d4a;
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+header {
+    background-color: #9c5a78;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* ========================= */
+/* NAV */
+/* ========================= */
+nav {
+    background-color: #e8b6c8;
+    padding: 10px;
+    border-radius: 20px;
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* ========================= */
+/* INICIO */
+/* ========================= */
+#inicio {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+#inicio h2 {
+    font-size: 50px;
+    color: #9c5a78;
+    margin-bottom: 20px;
+}
+
+#inicio p {
+    max-width: 600px;
+    margin: auto;
+    font-size: 16px;
+}
+
+/* ========================= */
+/* BOTONES */
+/* ========================= */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #e8b6c8;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #d89ab0;
+    transform: scale(1.05);
+}
+
+/* ========================= */
+/* SECCIONES */
+/* ========================= */
+section {
+    padding: 30px;
+    text-align: center;
+}
+
+/* ========================= */
+/* SOBRE NOSOTROS */
+/* ========================= */
+#sobre {
+    background: white;
+    margin: 30px auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#sobre h2 {
+    color: #9c5a78;
+    margin-bottom: 20px;
+}
+
+#sobre p {
+    line-height: 1.6;
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* ========================= */
+/* IMAGEN DEL MENÚ */
+/* ========================= */
+#menuImagen img {
+    max-width: 90%;
+    max-height: 80%;
+    border: 5px solid #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px black;
+
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+#menuImagen.show img {
+    transform: scale(1);
+}
+
+/* ========================= */
+/* SCROLL */
+/* ========================= */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================= */
+/* MODALES */
+/* ========================= */
+#menuImagen,
+#ordenModal,
+#pedidosModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0,0,0,0.7);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* ACTIVAR MODAL */
+#menuImagen.show,
+#ordenModal.show,
+#pedidosModal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* IMPORTANTE PARA MENÚ */
+#menuImagen {
+    display: none;
+}
+
+#menuImagen.show {
+    display: flex;
+}
+
+/* ========================= */
+/* CONTENIDO MODALES */
+/* ========================= */
+.orden-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+/* ANIMACIÓN */
+#ordenModal.show .orden-contenido,
+#pedidosModal.show .orden-contenido {
+    transform: scale(1);
+}
+
+/* ========================= */
+/* LISTA DE PEDIDOS */
+/* ========================= */
+#listaPedidos {
+    list-style: none;
+    padding: 0;
+}
+
+#listaPedidos li {
+    background: #fff;
+    margin: 10px auto;
+    padding: 10px;
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+#nosotros {
+    background: #e2b5e3;
+    margin: 30px auto;
+    padding: 25px;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#nosotros p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+/* ========================= */
+/* 🔥 CARRUSEL (LO NUEVO) */
+/* ========================= */
+.carrusel {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.carrusel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.carrusel img {
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 12px;
+}
+
+/* BOTONES */
+.carrusel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* ========================= */
+/* INICIO FLEX (TEXTO + IMAGEN) */
+/* ========================= */
+.inicio-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px; /* espacio entre texto e imagen */
+}
+
+.inicio-texto {
+    flex: 1 1 300px;
+    max-width: 500px;
+    text-align: left;
+}
+
+.inicio-imagen {
+    flex: 1 1 300px;
+    max-width: 500px;
+}
